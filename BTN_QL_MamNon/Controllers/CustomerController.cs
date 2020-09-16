@@ -12,7 +12,7 @@ namespace BTN_QL_MamNon.Controllers
     public class CustomerController : ApiController
     {
         // GET: api/Customer
-        //jjjj
+        //jjjjádfasdf
         public HttpResponseMessage Get()
         {
             QLMamNonEntities db = new QLMamNonEntities();
