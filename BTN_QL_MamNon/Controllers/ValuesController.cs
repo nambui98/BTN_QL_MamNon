@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BTN_QL_MamNon.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -10,9 +11,11 @@ namespace BTN_QL_MamNon.Controllers
     public class ValuesController : ApiController
     {
         // GET api/values
-        public IEnumerable<string> Get()
+        public HttpResponseMessage Get()
         {
-            return new string[] { "value1", "value2" };
+            QLMamNonEntities db = new QLMamNonEntities();
+            var result = db.customers;
+            return Request.CreateResponse(HttpStatusCode.OK, result.ToList());
         }
 
         // GET api/values/5

@@ -1,0 +1,1089 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="QLMamNonModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="child">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="birthday" Type="date" />
+          <Property Name="gender" Type="int" />
+          <Property Name="status" Type="int" />
+          <Property Name="id_customer" Type="bigint" />
+        </EntityType>
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="phone" Type="nchar" MaxLength="10" />
+          <Property Name="username" Type="nchar" MaxLength="20" />
+          <Property Name="password" Type="varchar" MaxLength="50" />
+          <Property Name="address" Type="nvarchar" MaxLength="50" />
+          <Property Name="account_number" Type="varchar" MaxLength="50" />
+          <Property Name="avatar" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="dish">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="fixtures">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_category_fixtures" Type="bigint" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="remain_quantity" Type="int" />
+          <Property Name="lose_quantity" Type="int" />
+        </EntityType>
+        <EntityType Name="kitchen">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="address" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="kitchen_provider">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_kitchen" Type="bigint" />
+          <Property Name="id_provider" Type="bigint" />
+        </EntityType>
+        <EntityType Name="lesson">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_plan" Type="bigint" />
+          <Property Name="id_staff" Type="bigint" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="content" Type="nvarchar(max)" />
+          <Property Name="time_start" Type="time" Precision="7" />
+          <Property Name="time_end" Type="time" Precision="7" />
+        </EntityType>
+        <EntityType Name="lesson_plan">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="date" />
+        </EntityType>
+        <EntityType Name="menu">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="date" Type="date" />
+          <Property Name="id_staff" Type="bigint" />
+        </EntityType>
+        <EntityType Name="menu_dish">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_menu" Type="bigint" />
+          <Property Name="id_dish" Type="bigint" />
+        </EntityType>
+        <EntityType Name="payment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_customer" Type="bigint" />
+          <Property Name="id_child" Type="bigint" />
+          <Property Name="quantity_months" Type="int" />
+          <Property Name="tuition_fees" Type="float" />
+          <Property Name="payment_date" Type="datetime" />
+          <Property Name="expiration_date" Type="datetime" />
+          <Property Name="status" Type="int" />
+        </EntityType>
+        <EntityType Name="position">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="position_role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_position" Type="bigint" />
+          <Property Name="id_role" Type="bigint" />
+        </EntityType>
+        <EntityType Name="provider">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="address" Type="nvarchar" MaxLength="50" />
+          <Property Name="phone" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="revenue_expenditure">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="pay" Type="float" />
+          <Property Name="pay_type" Type="int" />
+          <Property Name="status" Type="int" />
+          <Property Name="id_staff" Type="bigint" />
+        </EntityType>
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="address" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="salary">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_staff" Type="bigint" />
+          <Property Name="main_salary" Type="float" />
+          <Property Name="allowance_salary" Type="float" />
+          <Property Name="bonus_young_salary" Type="float" />
+        </EntityType>
+        <EntityType Name="staff_teacher">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="phone" Type="nchar" MaxLength="10" />
+          <Property Name="username" Type="nchar" MaxLength="10" />
+          <Property Name="password" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="address" Type="nvarchar(max)" />
+          <Property Name="avatar" Type="varchar(max)" />
+        </EntityType>
+        <Association Name="FK_child_customer">
+          <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
+          <End Role="child" Type="Self.child" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="child">
+              <PropertyRef Name="id_customer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kitchen_provider_kitchen">
+          <End Role="kitchen" Type="Self.kitchen" Multiplicity="0..1" />
+          <End Role="kitchen_provider" Type="Self.kitchen_provider" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kitchen">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="kitchen_provider">
+              <PropertyRef Name="id_kitchen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kitchen_provider_provider">
+          <End Role="provider" Type="Self.provider" Multiplicity="0..1" />
+          <End Role="kitchen_provider" Type="Self.kitchen_provider" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="provider">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="kitchen_provider">
+              <PropertyRef Name="id_provider" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_lesson_lesson_plan">
+          <End Role="lesson_plan" Type="Self.lesson_plan" Multiplicity="0..1" />
+          <End Role="lesson" Type="Self.lesson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lesson_plan">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="lesson">
+              <PropertyRef Name="id_plan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_lesson_staff_teacher">
+          <End Role="staff_teacher" Type="Self.staff_teacher" Multiplicity="0..1" />
+          <End Role="lesson" Type="Self.lesson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff_teacher">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="lesson">
+              <PropertyRef Name="id_staff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_menu_dish_dish">
+          <End Role="dish" Type="Self.dish" Multiplicity="0..1" />
+          <End Role="menu_dish" Type="Self.menu_dish" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="dish">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="menu_dish">
+              <PropertyRef Name="id_dish" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_menu_dish_menu">
+          <End Role="menu" Type="Self.menu" Multiplicity="0..1" />
+          <End Role="menu_dish" Type="Self.menu_dish" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="menu">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="menu_dish">
+              <PropertyRef Name="id_menu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_menu_staff_teacher">
+          <End Role="staff_teacher" Type="Self.staff_teacher" Multiplicity="0..1" />
+          <End Role="menu" Type="Self.menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff_teacher">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="menu">
+              <PropertyRef Name="id_staff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_payment_child">
+          <End Role="child" Type="Self.child" Multiplicity="0..1" />
+          <End Role="payment" Type="Self.payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="child">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="payment">
+              <PropertyRef Name="id_child" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_payment_customer">
+          <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
+          <End Role="payment" Type="Self.payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="payment">
+              <PropertyRef Name="id_customer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_position_role_position">
+          <End Role="position" Type="Self.position" Multiplicity="0..1" />
+          <End Role="position_role" Type="Self.position_role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="position">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="position_role">
+              <PropertyRef Name="id_position" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_position_role_role">
+          <End Role="role" Type="Self.role" Multiplicity="0..1" />
+          <End Role="position_role" Type="Self.position_role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="role">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="position_role">
+              <PropertyRef Name="id_role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_revenue_expenditure_staff_teacher">
+          <End Role="staff_teacher" Type="Self.staff_teacher" Multiplicity="0..1" />
+          <End Role="revenue_expenditure" Type="Self.revenue_expenditure" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff_teacher">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="revenue_expenditure">
+              <PropertyRef Name="id_staff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_salary_salary">
+          <End Role="staff_teacher" Type="Self.staff_teacher" Multiplicity="0..1" />
+          <End Role="salary" Type="Self.salary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff_teacher">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="salary">
+              <PropertyRef Name="id_staff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QLMamNonModelStoreContainer">
+          <EntitySet Name="child" EntityType="Self.child" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="customer" EntityType="Self.customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dish" EntityType="Self.dish" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fixtures" EntityType="Self.fixtures" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="kitchen" EntityType="Self.kitchen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="kitchen_provider" EntityType="Self.kitchen_provider" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="lesson" EntityType="Self.lesson" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="lesson_plan" EntityType="Self.lesson_plan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="menu" EntityType="Self.menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="menu_dish" EntityType="Self.menu_dish" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="payment" EntityType="Self.payment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="position" EntityType="Self.position" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="position_role" EntityType="Self.position_role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="provider" EntityType="Self.provider" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="revenue_expenditure" EntityType="Self.revenue_expenditure" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="role" EntityType="Self.role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="salary" EntityType="Self.salary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="staff_teacher" EntityType="Self.staff_teacher" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_child_customer" Association="Self.FK_child_customer">
+            <End Role="customer" EntitySet="customer" />
+            <End Role="child" EntitySet="child" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kitchen_provider_kitchen" Association="Self.FK_kitchen_provider_kitchen">
+            <End Role="kitchen" EntitySet="kitchen" />
+            <End Role="kitchen_provider" EntitySet="kitchen_provider" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kitchen_provider_provider" Association="Self.FK_kitchen_provider_provider">
+            <End Role="provider" EntitySet="provider" />
+            <End Role="kitchen_provider" EntitySet="kitchen_provider" />
+          </AssociationSet>
+          <AssociationSet Name="FK_lesson_lesson_plan" Association="Self.FK_lesson_lesson_plan">
+            <End Role="lesson_plan" EntitySet="lesson_plan" />
+            <End Role="lesson" EntitySet="lesson" />
+          </AssociationSet>
+          <AssociationSet Name="FK_lesson_staff_teacher" Association="Self.FK_lesson_staff_teacher">
+            <End Role="staff_teacher" EntitySet="staff_teacher" />
+            <End Role="lesson" EntitySet="lesson" />
+          </AssociationSet>
+          <AssociationSet Name="FK_menu_dish_dish" Association="Self.FK_menu_dish_dish">
+            <End Role="dish" EntitySet="dish" />
+            <End Role="menu_dish" EntitySet="menu_dish" />
+          </AssociationSet>
+          <AssociationSet Name="FK_menu_dish_menu" Association="Self.FK_menu_dish_menu">
+            <End Role="menu" EntitySet="menu" />
+            <End Role="menu_dish" EntitySet="menu_dish" />
+          </AssociationSet>
+          <AssociationSet Name="FK_menu_staff_teacher" Association="Self.FK_menu_staff_teacher">
+            <End Role="staff_teacher" EntitySet="staff_teacher" />
+            <End Role="menu" EntitySet="menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_payment_child" Association="Self.FK_payment_child">
+            <End Role="child" EntitySet="child" />
+            <End Role="payment" EntitySet="payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_payment_customer" Association="Self.FK_payment_customer">
+            <End Role="customer" EntitySet="customer" />
+            <End Role="payment" EntitySet="payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_position_role_position" Association="Self.FK_position_role_position">
+            <End Role="position" EntitySet="position" />
+            <End Role="position_role" EntitySet="position_role" />
+          </AssociationSet>
+          <AssociationSet Name="FK_position_role_role" Association="Self.FK_position_role_role">
+            <End Role="role" EntitySet="role" />
+            <End Role="position_role" EntitySet="position_role" />
+          </AssociationSet>
+          <AssociationSet Name="FK_revenue_expenditure_staff_teacher" Association="Self.FK_revenue_expenditure_staff_teacher">
+            <End Role="staff_teacher" EntitySet="staff_teacher" />
+            <End Role="revenue_expenditure" EntitySet="revenue_expenditure" />
+          </AssociationSet>
+          <AssociationSet Name="FK_salary_salary" Association="Self.FK_salary_salary">
+            <End Role="staff_teacher" EntitySet="staff_teacher" />
+            <End Role="salary" EntitySet="salary" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QLMamNonModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="child">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="birthday" Type="DateTime" Precision="0" />
+          <Property Name="gender" Type="Int32" />
+          <Property Name="status" Type="Int32" />
+          <Property Name="id_customer" Type="Int64" />
+          <NavigationProperty Name="customer" Relationship="Self.FK_child_customer" FromRole="child" ToRole="customer" />
+          <NavigationProperty Name="payments" Relationship="Self.FK_payment_child" FromRole="child" ToRole="payment" />
+        </EntityType>
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="username" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="account_number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="avatar" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="children" Relationship="Self.FK_child_customer" FromRole="customer" ToRole="child" />
+          <NavigationProperty Name="payments" Relationship="Self.FK_payment_customer" FromRole="customer" ToRole="payment" />
+        </EntityType>
+        <EntityType Name="dish">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="menu_dish" Relationship="Self.FK_menu_dish_dish" FromRole="dish" ToRole="menu_dish" />
+        </EntityType>
+        <EntityType Name="fixture">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_category_fixtures" Type="Int64" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="remain_quantity" Type="Int32" />
+          <Property Name="lose_quantity" Type="Int32" />
+        </EntityType>
+        <EntityType Name="kitchen">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="kitchen_provider" Relationship="Self.FK_kitchen_provider_kitchen" FromRole="kitchen" ToRole="kitchen_provider" />
+        </EntityType>
+        <EntityType Name="kitchen_provider">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_kitchen" Type="Int64" />
+          <Property Name="id_provider" Type="Int64" />
+          <NavigationProperty Name="kitchen" Relationship="Self.FK_kitchen_provider_kitchen" FromRole="kitchen_provider" ToRole="kitchen" />
+          <NavigationProperty Name="provider" Relationship="Self.FK_kitchen_provider_provider" FromRole="kitchen_provider" ToRole="provider" />
+        </EntityType>
+        <EntityType Name="lesson">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_plan" Type="Int64" />
+          <Property Name="id_staff" Type="Int64" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="time_start" Type="Time" Precision="7" />
+          <Property Name="time_end" Type="Time" Precision="7" />
+          <NavigationProperty Name="lesson_plan" Relationship="Self.FK_lesson_lesson_plan" FromRole="lesson" ToRole="lesson_plan" />
+          <NavigationProperty Name="staff_teacher" Relationship="Self.FK_lesson_staff_teacher" FromRole="lesson" ToRole="staff_teacher" />
+        </EntityType>
+        <EntityType Name="lesson_plan">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="lessons" Relationship="Self.FK_lesson_lesson_plan" FromRole="lesson_plan" ToRole="lesson" />
+        </EntityType>
+        <EntityType Name="menu">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="date" Type="DateTime" Precision="0" />
+          <Property Name="id_staff" Type="Int64" />
+          <NavigationProperty Name="menu_dish" Relationship="Self.FK_menu_dish_menu" FromRole="menu" ToRole="menu_dish" />
+          <NavigationProperty Name="staff_teacher" Relationship="Self.FK_menu_staff_teacher" FromRole="menu" ToRole="staff_teacher" />
+        </EntityType>
+        <EntityType Name="menu_dish">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_menu" Type="Int64" />
+          <Property Name="id_dish" Type="Int64" />
+          <NavigationProperty Name="dish" Relationship="Self.FK_menu_dish_dish" FromRole="menu_dish" ToRole="dish" />
+          <NavigationProperty Name="menu" Relationship="Self.FK_menu_dish_menu" FromRole="menu_dish" ToRole="menu" />
+        </EntityType>
+        <EntityType Name="payment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_customer" Type="Int64" />
+          <Property Name="id_child" Type="Int64" />
+          <Property Name="quantity_months" Type="Int32" />
+          <Property Name="tuition_fees" Type="Double" />
+          <Property Name="payment_date" Type="DateTime" Precision="3" />
+          <Property Name="expiration_date" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="Int32" />
+          <NavigationProperty Name="child" Relationship="Self.FK_payment_child" FromRole="payment" ToRole="child" />
+          <NavigationProperty Name="customer" Relationship="Self.FK_payment_customer" FromRole="payment" ToRole="customer" />
+        </EntityType>
+        <EntityType Name="position">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="position_role" Relationship="Self.FK_position_role_position" FromRole="position" ToRole="position_role" />
+        </EntityType>
+        <EntityType Name="position_role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_position" Type="Int64" />
+          <Property Name="id_role" Type="Int64" />
+          <NavigationProperty Name="position" Relationship="Self.FK_position_role_position" FromRole="position_role" ToRole="position" />
+          <NavigationProperty Name="role" Relationship="Self.FK_position_role_role" FromRole="position_role" ToRole="role" />
+        </EntityType>
+        <EntityType Name="provider">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="kitchen_provider" Relationship="Self.FK_kitchen_provider_provider" FromRole="provider" ToRole="kitchen_provider" />
+        </EntityType>
+        <EntityType Name="revenue_expenditure">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="pay" Type="Double" />
+          <Property Name="pay_type" Type="Int32" />
+          <Property Name="status" Type="Int32" />
+          <Property Name="id_staff" Type="Int64" />
+          <NavigationProperty Name="staff_teacher" Relationship="Self.FK_revenue_expenditure_staff_teacher" FromRole="revenue_expenditure" ToRole="staff_teacher" />
+        </EntityType>
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="position_role" Relationship="Self.FK_position_role_role" FromRole="role" ToRole="position_role" />
+        </EntityType>
+        <EntityType Name="salary">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_staff" Type="Int64" />
+          <Property Name="main_salary" Type="Double" />
+          <Property Name="allowance_salary" Type="Double" />
+          <Property Name="bonus_young_salary" Type="Double" />
+          <NavigationProperty Name="staff_teacher" Relationship="Self.FK_salary_salary" FromRole="salary" ToRole="staff_teacher" />
+        </EntityType>
+        <EntityType Name="staff_teacher">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="username" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="avatar" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="lessons" Relationship="Self.FK_lesson_staff_teacher" FromRole="staff_teacher" ToRole="lesson" />
+          <NavigationProperty Name="menus" Relationship="Self.FK_menu_staff_teacher" FromRole="staff_teacher" ToRole="menu" />
+          <NavigationProperty Name="revenue_expenditure" Relationship="Self.FK_revenue_expenditure_staff_teacher" FromRole="staff_teacher" ToRole="revenue_expenditure" />
+          <NavigationProperty Name="salaries" Relationship="Self.FK_salary_salary" FromRole="staff_teacher" ToRole="salary" />
+        </EntityType>
+        <Association Name="FK_child_customer">
+          <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
+          <End Role="child" Type="Self.child" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="child">
+              <PropertyRef Name="id_customer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_payment_child">
+          <End Role="child" Type="Self.child" Multiplicity="0..1" />
+          <End Role="payment" Type="Self.payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="child">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="payment">
+              <PropertyRef Name="id_child" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_payment_customer">
+          <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
+          <End Role="payment" Type="Self.payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="payment">
+              <PropertyRef Name="id_customer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_menu_dish_dish">
+          <End Role="dish" Type="Self.dish" Multiplicity="0..1" />
+          <End Role="menu_dish" Type="Self.menu_dish" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="dish">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="menu_dish">
+              <PropertyRef Name="id_dish" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kitchen_provider_kitchen">
+          <End Role="kitchen" Type="Self.kitchen" Multiplicity="0..1" />
+          <End Role="kitchen_provider" Type="Self.kitchen_provider" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kitchen">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="kitchen_provider">
+              <PropertyRef Name="id_kitchen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kitchen_provider_provider">
+          <End Role="provider" Type="Self.provider" Multiplicity="0..1" />
+          <End Role="kitchen_provider" Type="Self.kitchen_provider" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="provider">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="kitchen_provider">
+              <PropertyRef Name="id_provider" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_lesson_lesson_plan">
+          <End Role="lesson_plan" Type="Self.lesson_plan" Multiplicity="0..1" />
+          <End Role="lesson" Type="Self.lesson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lesson_plan">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="lesson">
+              <PropertyRef Name="id_plan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_lesson_staff_teacher">
+          <End Role="staff_teacher" Type="Self.staff_teacher" Multiplicity="0..1" />
+          <End Role="lesson" Type="Self.lesson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff_teacher">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="lesson">
+              <PropertyRef Name="id_staff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_menu_dish_menu">
+          <End Role="menu" Type="Self.menu" Multiplicity="0..1" />
+          <End Role="menu_dish" Type="Self.menu_dish" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="menu">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="menu_dish">
+              <PropertyRef Name="id_menu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_menu_staff_teacher">
+          <End Role="staff_teacher" Type="Self.staff_teacher" Multiplicity="0..1" />
+          <End Role="menu" Type="Self.menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff_teacher">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="menu">
+              <PropertyRef Name="id_staff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_position_role_position">
+          <End Role="position" Type="Self.position" Multiplicity="0..1" />
+          <End Role="position_role" Type="Self.position_role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="position">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="position_role">
+              <PropertyRef Name="id_position" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_position_role_role">
+          <End Role="role" Type="Self.role" Multiplicity="0..1" />
+          <End Role="position_role" Type="Self.position_role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="role">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="position_role">
+              <PropertyRef Name="id_role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_revenue_expenditure_staff_teacher">
+          <End Role="staff_teacher" Type="Self.staff_teacher" Multiplicity="0..1" />
+          <End Role="revenue_expenditure" Type="Self.revenue_expenditure" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff_teacher">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="revenue_expenditure">
+              <PropertyRef Name="id_staff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_salary_salary">
+          <End Role="staff_teacher" Type="Self.staff_teacher" Multiplicity="0..1" />
+          <End Role="salary" Type="Self.salary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff_teacher">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="salary">
+              <PropertyRef Name="id_staff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QLMamNonEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="children" EntityType="Self.child" />
+          <EntitySet Name="customers" EntityType="Self.customer" />
+          <EntitySet Name="dishes" EntityType="Self.dish" />
+          <EntitySet Name="fixtures" EntityType="Self.fixture" />
+          <EntitySet Name="kitchens" EntityType="Self.kitchen" />
+          <EntitySet Name="kitchen_provider" EntityType="Self.kitchen_provider" />
+          <EntitySet Name="lessons" EntityType="Self.lesson" />
+          <EntitySet Name="lesson_plan" EntityType="Self.lesson_plan" />
+          <EntitySet Name="menus" EntityType="Self.menu" />
+          <EntitySet Name="menu_dish" EntityType="Self.menu_dish" />
+          <EntitySet Name="payments" EntityType="Self.payment" />
+          <EntitySet Name="positions" EntityType="Self.position" />
+          <EntitySet Name="position_role" EntityType="Self.position_role" />
+          <EntitySet Name="providers" EntityType="Self.provider" />
+          <EntitySet Name="revenue_expenditure" EntityType="Self.revenue_expenditure" />
+          <EntitySet Name="roles" EntityType="Self.role" />
+          <EntitySet Name="salaries" EntityType="Self.salary" />
+          <EntitySet Name="staff_teacher" EntityType="Self.staff_teacher" />
+          <AssociationSet Name="FK_child_customer" Association="Self.FK_child_customer">
+            <End Role="customer" EntitySet="customers" />
+            <End Role="child" EntitySet="children" />
+          </AssociationSet>
+          <AssociationSet Name="FK_payment_child" Association="Self.FK_payment_child">
+            <End Role="child" EntitySet="children" />
+            <End Role="payment" EntitySet="payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_payment_customer" Association="Self.FK_payment_customer">
+            <End Role="customer" EntitySet="customers" />
+            <End Role="payment" EntitySet="payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_menu_dish_dish" Association="Self.FK_menu_dish_dish">
+            <End Role="dish" EntitySet="dishes" />
+            <End Role="menu_dish" EntitySet="menu_dish" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kitchen_provider_kitchen" Association="Self.FK_kitchen_provider_kitchen">
+            <End Role="kitchen" EntitySet="kitchens" />
+            <End Role="kitchen_provider" EntitySet="kitchen_provider" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kitchen_provider_provider" Association="Self.FK_kitchen_provider_provider">
+            <End Role="provider" EntitySet="providers" />
+            <End Role="kitchen_provider" EntitySet="kitchen_provider" />
+          </AssociationSet>
+          <AssociationSet Name="FK_lesson_lesson_plan" Association="Self.FK_lesson_lesson_plan">
+            <End Role="lesson_plan" EntitySet="lesson_plan" />
+            <End Role="lesson" EntitySet="lessons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_lesson_staff_teacher" Association="Self.FK_lesson_staff_teacher">
+            <End Role="staff_teacher" EntitySet="staff_teacher" />
+            <End Role="lesson" EntitySet="lessons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_menu_dish_menu" Association="Self.FK_menu_dish_menu">
+            <End Role="menu" EntitySet="menus" />
+            <End Role="menu_dish" EntitySet="menu_dish" />
+          </AssociationSet>
+          <AssociationSet Name="FK_menu_staff_teacher" Association="Self.FK_menu_staff_teacher">
+            <End Role="staff_teacher" EntitySet="staff_teacher" />
+            <End Role="menu" EntitySet="menus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_position_role_position" Association="Self.FK_position_role_position">
+            <End Role="position" EntitySet="positions" />
+            <End Role="position_role" EntitySet="position_role" />
+          </AssociationSet>
+          <AssociationSet Name="FK_position_role_role" Association="Self.FK_position_role_role">
+            <End Role="role" EntitySet="roles" />
+            <End Role="position_role" EntitySet="position_role" />
+          </AssociationSet>
+          <AssociationSet Name="FK_revenue_expenditure_staff_teacher" Association="Self.FK_revenue_expenditure_staff_teacher">
+            <End Role="staff_teacher" EntitySet="staff_teacher" />
+            <End Role="revenue_expenditure" EntitySet="revenue_expenditure" />
+          </AssociationSet>
+          <AssociationSet Name="FK_salary_salary" Association="Self.FK_salary_salary">
+            <End Role="staff_teacher" EntitySet="staff_teacher" />
+            <End Role="salary" EntitySet="salaries" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QLMamNonModelStoreContainer" CdmEntityContainer="QLMamNonEntities">
+          <EntitySetMapping Name="children">
+            <EntityTypeMapping TypeName="QLMamNonModel.child">
+              <MappingFragment StoreEntitySet="child">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="birthday" ColumnName="birthday" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="id_customer" ColumnName="id_customer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="customers">
+            <EntityTypeMapping TypeName="QLMamNonModel.customer">
+              <MappingFragment StoreEntitySet="customer">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="account_number" ColumnName="account_number" />
+                <ScalarProperty Name="avatar" ColumnName="avatar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dishes">
+            <EntityTypeMapping TypeName="QLMamNonModel.dish">
+              <MappingFragment StoreEntitySet="dish">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fixtures">
+            <EntityTypeMapping TypeName="QLMamNonModel.fixture">
+              <MappingFragment StoreEntitySet="fixtures">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_category_fixtures" ColumnName="id_category_fixtures" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="remain_quantity" ColumnName="remain_quantity" />
+                <ScalarProperty Name="lose_quantity" ColumnName="lose_quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="kitchens">
+            <EntityTypeMapping TypeName="QLMamNonModel.kitchen">
+              <MappingFragment StoreEntitySet="kitchen">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="address" ColumnName="address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="kitchen_provider">
+            <EntityTypeMapping TypeName="QLMamNonModel.kitchen_provider">
+              <MappingFragment StoreEntitySet="kitchen_provider">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_kitchen" ColumnName="id_kitchen" />
+                <ScalarProperty Name="id_provider" ColumnName="id_provider" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lessons">
+            <EntityTypeMapping TypeName="QLMamNonModel.lesson">
+              <MappingFragment StoreEntitySet="lesson">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_plan" ColumnName="id_plan" />
+                <ScalarProperty Name="id_staff" ColumnName="id_staff" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="content" ColumnName="content" />
+                <ScalarProperty Name="time_start" ColumnName="time_start" />
+                <ScalarProperty Name="time_end" ColumnName="time_end" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lesson_plan">
+            <EntityTypeMapping TypeName="QLMamNonModel.lesson_plan">
+              <MappingFragment StoreEntitySet="lesson_plan">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="date" ColumnName="date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="menus">
+            <EntityTypeMapping TypeName="QLMamNonModel.menu">
+              <MappingFragment StoreEntitySet="menu">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="id_staff" ColumnName="id_staff" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="menu_dish">
+            <EntityTypeMapping TypeName="QLMamNonModel.menu_dish">
+              <MappingFragment StoreEntitySet="menu_dish">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_menu" ColumnName="id_menu" />
+                <ScalarProperty Name="id_dish" ColumnName="id_dish" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="payments">
+            <EntityTypeMapping TypeName="QLMamNonModel.payment">
+              <MappingFragment StoreEntitySet="payment">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_customer" ColumnName="id_customer" />
+                <ScalarProperty Name="id_child" ColumnName="id_child" />
+                <ScalarProperty Name="quantity_months" ColumnName="quantity_months" />
+                <ScalarProperty Name="tuition_fees" ColumnName="tuition_fees" />
+                <ScalarProperty Name="payment_date" ColumnName="payment_date" />
+                <ScalarProperty Name="expiration_date" ColumnName="expiration_date" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="positions">
+            <EntityTypeMapping TypeName="QLMamNonModel.position">
+              <MappingFragment StoreEntitySet="position">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="position_role">
+            <EntityTypeMapping TypeName="QLMamNonModel.position_role">
+              <MappingFragment StoreEntitySet="position_role">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_position" ColumnName="id_position" />
+                <ScalarProperty Name="id_role" ColumnName="id_role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="providers">
+            <EntityTypeMapping TypeName="QLMamNonModel.provider">
+              <MappingFragment StoreEntitySet="provider">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="revenue_expenditure">
+            <EntityTypeMapping TypeName="QLMamNonModel.revenue_expenditure">
+              <MappingFragment StoreEntitySet="revenue_expenditure">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="pay" ColumnName="pay" />
+                <ScalarProperty Name="pay_type" ColumnName="pay_type" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="id_staff" ColumnName="id_staff" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="roles">
+            <EntityTypeMapping TypeName="QLMamNonModel.role">
+              <MappingFragment StoreEntitySet="role">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="address" ColumnName="address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="salaries">
+            <EntityTypeMapping TypeName="QLMamNonModel.salary">
+              <MappingFragment StoreEntitySet="salary">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_staff" ColumnName="id_staff" />
+                <ScalarProperty Name="main_salary" ColumnName="main_salary" />
+                <ScalarProperty Name="allowance_salary" ColumnName="allowance_salary" />
+                <ScalarProperty Name="bonus_young_salary" ColumnName="bonus_young_salary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="staff_teacher">
+            <EntityTypeMapping TypeName="QLMamNonModel.staff_teacher">
+              <MappingFragment StoreEntitySet="staff_teacher">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="avatar" ColumnName="avatar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
