@@ -27,7 +27,7 @@ namespace BTN_QL_MamNon.Controllers
                 fixture s = db.fixtures.SingleOrDefault(x => x.id == id);
                 if (s != null)
                 {
-                    return new fixturesDTO(s.id, Convert.ToInt64(s.id_category_fixtures),s.name, (int)(s.remain_quantity), (int)(s.lose_quantity));
+                    return new fixturesDTO(s.id, Convert.ToInt64(s.id_category_fixtures), s.name, (int)(s.remain_quantity), (int)(s.lose_quantity));
                 }
                 else
                 {

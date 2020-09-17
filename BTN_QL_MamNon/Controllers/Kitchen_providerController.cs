@@ -9,25 +9,25 @@ using BTN_QL_MamNon.Models;
 
 namespace BTN_QL_MamNon.Controllers
 {
-    public class Kitchen_providerController : ApiController
+    public class KitchenController : ApiController
     {
-        // GET: api/Kitchen_provider
+        // GET: api/Kitchen
         public HttpResponseMessage Get()
         {
             QLMamNonEntities db = new QLMamNonEntities();
-            var result = db.kitchen_provider;
+            var result = db.kitchens;
             return Request.CreateResponse(HttpStatusCode.OK, result.ToList());
         }
 
-        // GET: api/Kitchen_provider/5
-        public kitchen_providerDTO Get(int id)
+        // GET: api/Kitchen/5
+        public kitchenDTO Get(int id)
         {
             using (QLMamNonEntities db = new QLMamNonEntities())
             {
-                kitchen_provider s = db.kitchen_provider.SingleOrDefault(x => x.id == id);
+                kitchen s = db.kitchens.SingleOrDefault(x => x.id == id);
                 if (s != null)
-                { 
-                    return new kitchen_providerDTO(s.id,Convert.ToInt64(s.id_kitchen),Convert.ToInt64(s.id_provider));
+                {
+                    return new kitchenDTO(s.id, s.name, s.address);
                 }
                 else
                 {
@@ -36,14 +36,14 @@ namespace BTN_QL_MamNon.Controllers
             }
         }
 
-        // POST: api/Kitchen_provider
-        public HttpResponseMessage Post([FromBody] kitchen_provider obj)
+        // POST: api/Kitchen
+        public HttpResponseMessage Post([FromBody] kitchen obj)
         {
             try
             {
                 using (QLMamNonEntities db = new QLMamNonEntities())
                 {
-                    db.kitchen_provider.Add(obj);
+                    db.kitchens.Add(obj);
                     db.SaveChanges();
                     return Request.CreateResponse(HttpStatusCode.Created, obj);
                 }
@@ -55,19 +55,19 @@ namespace BTN_QL_MamNon.Controllers
 
         }
 
-        // PUT: api/Kitchen_provider/5
-        public HttpResponseMessage Put(int id, [FromBody] kitchen_provider value)
+        // PUT: api/Kitchen/5
+        public HttpResponseMessage Put(int id, [FromBody] kitchen value)
         {
             try
             {
                 using (QLMamNonEntities db = new QLMamNonEntities())
                 {
-                    kitchen_provider s = db.kitchen_provider.SingleOrDefault(b => b.id == id);
+                    kitchen s = db.kitchens.SingleOrDefault(b => b.id == id);
                     if (s != null)
                     {
-                        s.id_kitchen = value.id_kitchen;
-                        s.id_provider = value.id_provider;
-                        return Request.CreateResponse(HttpStatusCode.OK, new kitchen_providerDTO(s.id, Convert.ToInt64(s.id_kitchen), Convert.ToInt64(s.id_provider)));
+                        s.name = value.name;
+                        s.address = value.address;
+                        return Request.CreateResponse(HttpStatusCode.OK, new kitchenDTO(s.id, s.name, s.address));
                     }
                     else
                     {
@@ -81,15 +81,15 @@ namespace BTN_QL_MamNon.Controllers
             }
         }
 
-        // DELETE: api/Kitchen_provider/5
+        // DELETE: api/Kitchen/5
         public HttpResponseMessage Delete(int id)
         {
             try
             {
                 using (QLMamNonEntities db = new QLMamNonEntities())
                 {
-                    kitchen_provider s = db.kitchen_provider.SingleOrDefault(x => x.id == id);
-                    db.kitchen_provider.Remove(s);
+                    kitchen s = db.kitchens.SingleOrDefault(x => x.id == id);
+                    db.kitchens.Remove(s);
                     db.SaveChanges();
                     return Request.CreateResponse(HttpStatusCode.OK);
                 }

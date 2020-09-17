@@ -27,7 +27,7 @@ namespace BTN_QL_MamNon.Controllers
                 lesson_plan s = db.lesson_plan.SingleOrDefault(x => x.id == id);
                 if (s != null)
                 {
-                    return new lesson_planDTO(s.id,s.date.ToString() );
+                    return new lesson_planDTO(s.id, s.date.ToString());
                 }
                 else
                 {
@@ -66,7 +66,7 @@ namespace BTN_QL_MamNon.Controllers
                     if (s != null)
                     {
                         s.date = value.date;
-                        return Request.CreateResponse(HttpStatusCode.OK, new lesson_planDTO(s.id,s.date.ToString()));
+                        return Request.CreateResponse(HttpStatusCode.OK, new lesson_planDTO(s.id, s.date.ToString()));
                     }
                     else
                     {

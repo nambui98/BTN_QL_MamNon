@@ -27,7 +27,7 @@ namespace BTN_QL_MamNon.Controllers
                 lesson s = db.lessons.SingleOrDefault(x => x.id == id);
                 if (s != null)
                 {
-                    return new lessonDTO(s.id, Convert.ToInt64(s.id_plan), Convert.ToInt64(s.id_staff),s.name,s.content,s.time_start.ToString(),s.time_end.ToString());
+                    return new lessonDTO(s.id, Convert.ToInt64(s.id_plan), Convert.ToInt64(s.id_staff), s.name, s.content, s.time_start.ToString(), s.time_end.ToString());
                 }
                 else
                 {

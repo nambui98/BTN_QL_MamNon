@@ -28,7 +28,7 @@ namespace BTN_QL_MamNon.Controllers
                 child s = db.children.SingleOrDefault(x => x.id == id);
                 if (s != null)
                 {
-                    return new childDTO(s.id, s.name,s.birthday.ToString(),(int)(s.gender), (int)(s.status), Convert.ToInt64(s.id_customer));
+                    return new childDTO(s.id, s.name, s.birthday.ToString(), (int)(s.gender), (int)(s.status), Convert.ToInt64(s.id_customer));
                 }
                 else
                 {
@@ -72,7 +72,7 @@ namespace BTN_QL_MamNon.Controllers
                         s.status = value.status;
                         s.id_customer = value.id_customer;
                         db.SaveChanges();
-                        return Request.CreateResponse(HttpStatusCode.OK, new childDTO(s.id, s.name, s.birthday.ToString(),(int)(s.gender), (int)(s.status), Convert.ToInt64(s.id_customer)));
+                        return Request.CreateResponse(HttpStatusCode.OK, new childDTO(s.id, s.name, s.birthday.ToString(), (int)(s.gender), (int)(s.status), Convert.ToInt64(s.id_customer)));
                     }
                     else
                     {
