@@ -1,35 +1,33 @@
-﻿using BTN_QL_MamNon.DTO;
-using BTN_QL_MamNon.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using BTN_QL_MamNon.DTO;
+using BTN_QL_MamNon.Models;
 
 namespace BTN_QL_MamNon.Controllers
 {
-    public class CustomerController : ApiController
+    public class Kitchen_providerController : ApiController
     {
-        // GET: api/Customer
-        //jjjjádfasdf
-        //ADSadsÁDD
+        // GET: api/Kitchen_provider
         public HttpResponseMessage Get()
         {
             QLMamNonEntities db = new QLMamNonEntities();
-            var result = db.customers;
+            var result = db.kitchen_provider;
             return Request.CreateResponse(HttpStatusCode.OK, result.ToList());
         }
 
-        // GET: api/Customer/5
-        public customerDTO Get(int id)
+        // GET: api/Kitchen_provider/5
+        public kitchen_providerDTO Get(int id)
         {
             using (QLMamNonEntities db = new QLMamNonEntities())
             {
-                customer s = db.customers.SingleOrDefault(x => x.id == id);
+                kitchen_provider s = db.kitchen_provider.SingleOrDefault(x => x.id == id);
                 if (s != null)
-                {
-                    return new customerDTO(s.id, s.name, s.phone,s.username, s.avatar, s.address, s.account_number);
+                { 
+                    return new kitchen_providerDTO(s.id,Convert.ToInt64(s.id_kitchen),Convert.ToInt64(s.id_provider));
                 }
                 else
                 {
@@ -38,14 +36,14 @@ namespace BTN_QL_MamNon.Controllers
             }
         }
 
-        // POST: api/Customer
-        public HttpResponseMessage Post([FromBody] customer obj)
+        // POST: api/Kitchen_provider
+        public HttpResponseMessage Post([FromBody] kitchen_provider obj)
         {
             try
             {
                 using (QLMamNonEntities db = new QLMamNonEntities())
                 {
-                    db.customers.Add(obj);
+                    db.kitchen_provider.Add(obj);
                     db.SaveChanges();
                     return Request.CreateResponse(HttpStatusCode.Created, obj);
                 }
@@ -57,26 +55,19 @@ namespace BTN_QL_MamNon.Controllers
 
         }
 
-        // PUT: api/Customer/5
-        public HttpResponseMessage Put(int id, [FromBody] customer value)
+        // PUT: api/Kitchen_provider/5
+        public HttpResponseMessage Put(int id, [FromBody] kitchen_provider value)
         {
             try
             {
                 using (QLMamNonEntities db = new QLMamNonEntities())
                 {
-                    customer s = db.customers.SingleOrDefault(b => b.id == id);
+                    kitchen_provider s = db.kitchen_provider.SingleOrDefault(b => b.id == id);
                     if (s != null)
                     {
-                        s.name = value.name;
-                        s.phone = value.phone;
-                        s.username = value.username;
-                        s.password = value.password;
-                        s.address = value.address;
-                        s.account_number = value.account_number;
-                        s.avatar = value.avatar;
-                        db.SaveChanges();
-
-                        return Request.CreateResponse(HttpStatusCode.OK, new customerDTO(s.id, s.name, s.phone, s.username, s.avatar, s.address, s.account_number));
+                        s.id_kitchen = value.id_kitchen;
+                        s.id_provider = value.id_provider;
+                        return Request.CreateResponse(HttpStatusCode.OK, new kitchen_providerDTO(s.id, Convert.ToInt64(s.id_kitchen), Convert.ToInt64(s.id_provider)));
                     }
                     else
                     {
@@ -90,15 +81,15 @@ namespace BTN_QL_MamNon.Controllers
             }
         }
 
-        // DELETE: api/Customer/5
+        // DELETE: api/Kitchen_provider/5
         public HttpResponseMessage Delete(int id)
         {
             try
             {
                 using (QLMamNonEntities db = new QLMamNonEntities())
                 {
-                    customer s = db.customers.SingleOrDefault(x => x.id == id);
-                    db.customers.Remove(s);
+                    kitchen_provider s = db.kitchen_provider.SingleOrDefault(x => x.id == id);
+                    db.kitchen_provider.Remove(s);
                     db.SaveChanges();
                     return Request.CreateResponse(HttpStatusCode.OK);
                 }
