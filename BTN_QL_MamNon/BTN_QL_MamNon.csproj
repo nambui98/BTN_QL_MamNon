@@ -176,6 +176,7 @@
     <Compile Include="Controllers\ProviderController.cs" />
     <Compile Include="Controllers\revenue_expenditureController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\Staff_teacherController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="DTO\childDTO.cs" />
     <Compile Include="DTO\customerDTO.cs" />
@@ -190,6 +191,7 @@
     <Compile Include="DTO\providerDTO.cs" />
     <Compile Include="DTO\revenue_expenditureDTO.cs" />
     <Compile Include="DTO\roleDTO.cs" />
+    <Compile Include="DTO\staff_teacherDTO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
