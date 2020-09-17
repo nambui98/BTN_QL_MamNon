@@ -1,35 +1,33 @@
-﻿using BTN_QL_MamNon.DTO;
-using BTN_QL_MamNon.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using BTN_QL_MamNon.DTO;
+using BTN_QL_MamNon.Models;
 
 namespace BTN_QL_MamNon.Controllers
 {
-    public class CustomerController : ApiController
+    public class LessonController : ApiController
     {
-        // GET: api/Customer
-        //jjjjádfasdf
-        //ADSadsÁDD
+        // GET: api/Lesson
         public HttpResponseMessage Get()
         {
             QLMamNonEntities db = new QLMamNonEntities();
-            var result = db.customers;
+            var result = db.lessons;
             return Request.CreateResponse(HttpStatusCode.OK, result.ToList());
         }
 
-        // GET: api/Customer/5
-        public customerDTO Get(int id)
+        // GET: api/Lesson/5
+        public lessonDTO Get(int id)
         {
             using (QLMamNonEntities db = new QLMamNonEntities())
             {
-                customer s = db.customers.SingleOrDefault(x => x.id == id);
+                lesson s = db.lessons.SingleOrDefault(x => x.id == id);
                 if (s != null)
                 {
-                    return new customerDTO(s.id, s.name, s.phone,s.username, s.avatar, s.address, s.account_number);
+                    return new lessonDTO(s.id, Convert.ToInt64(s.id_plan), Convert.ToInt64(s.id_staff),s.name,s.content,s.time_start.ToString(),s.time_end.ToString());
                 }
                 else
                 {
@@ -38,14 +36,14 @@ namespace BTN_QL_MamNon.Controllers
             }
         }
 
-        // POST: api/Customer
-        public HttpResponseMessage Post([FromBody] customer obj)
+        // POST: api/Lesson
+        public HttpResponseMessage Post([FromBody] lesson obj)
         {
             try
             {
                 using (QLMamNonEntities db = new QLMamNonEntities())
                 {
-                    db.customers.Add(obj);
+                    db.lessons.Add(obj);
                     db.SaveChanges();
                     return Request.CreateResponse(HttpStatusCode.Created, obj);
                 }
@@ -57,26 +55,23 @@ namespace BTN_QL_MamNon.Controllers
 
         }
 
-        // PUT: api/Customer/5
-        public HttpResponseMessage Put(int id, [FromBody] customer value)
+        // PUT: api/Lesson/5
+        public HttpResponseMessage Put(int id, [FromBody] lesson value)
         {
             try
             {
                 using (QLMamNonEntities db = new QLMamNonEntities())
                 {
-                    customer s = db.customers.SingleOrDefault(b => b.id == id);
+                    lesson s = db.lessons.SingleOrDefault(b => b.id == id);
                     if (s != null)
                     {
+                        s.id_plan = value.id_plan;
+                        s.id_staff = value.id_staff;
                         s.name = value.name;
-                        s.phone = value.phone;
-                        s.username = value.username;
-                        s.password = value.password;
-                        s.address = value.address;
-                        s.account_number = value.account_number;
-                        s.avatar = value.avatar;
-                        db.SaveChanges();
-
-                        return Request.CreateResponse(HttpStatusCode.OK, new customerDTO(s.id, s.name, s.phone, s.username, s.avatar, s.address, s.account_number));
+                        s.content = value.content;
+                        s.time_start = value.time_start;
+                        s.time_end = value.time_end;
+                        return Request.CreateResponse(HttpStatusCode.OK, new lessonDTO(s.id, Convert.ToInt64(s.id_plan), Convert.ToInt64(s.id_staff), s.name, s.content, s.time_start.ToString(), s.time_end.ToString()));
                     }
                     else
                     {
@@ -90,15 +85,15 @@ namespace BTN_QL_MamNon.Controllers
             }
         }
 
-        // DELETE: api/Customer/5
+        // DELETE: api/Lesson/5
         public HttpResponseMessage Delete(int id)
         {
             try
             {
                 using (QLMamNonEntities db = new QLMamNonEntities())
                 {
-                    customer s = db.customers.SingleOrDefault(x => x.id == id);
-                    db.customers.Remove(s);
+                    lesson s = db.lessons.SingleOrDefault(x => x.id == id);
+                    db.lessons.Remove(s);
                     db.SaveChanges();
                     return Request.CreateResponse(HttpStatusCode.OK);
                 }

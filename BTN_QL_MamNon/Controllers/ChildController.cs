@@ -7,29 +7,28 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
+
 namespace BTN_QL_MamNon.Controllers
 {
-    public class CustomerController : ApiController
+    public class ChildController : ApiController
     {
-        // GET: api/Customer
-        //jjjjádfasdf
-        //ADSadsÁDD
+        // GET: api/Child
         public HttpResponseMessage Get()
         {
             QLMamNonEntities db = new QLMamNonEntities();
-            var result = db.customers;
+            var result = db.children;
             return Request.CreateResponse(HttpStatusCode.OK, result.ToList());
         }
 
-        // GET: api/Customer/5
-        public customerDTO Get(int id)
+        // GET: api/Child/5
+        public childDTO Get(int id)
         {
             using (QLMamNonEntities db = new QLMamNonEntities())
             {
-                customer s = db.customers.SingleOrDefault(x => x.id == id);
+                child s = db.children.SingleOrDefault(x => x.id == id);
                 if (s != null)
                 {
-                    return new customerDTO(s.id, s.name, s.phone,s.username, s.avatar, s.address, s.account_number);
+                    return new childDTO(s.id, s.name,s.birthday.ToString(),(int)(s.gender), (int)(s.status), Convert.ToInt64(s.id_customer));
                 }
                 else
                 {
@@ -38,14 +37,14 @@ namespace BTN_QL_MamNon.Controllers
             }
         }
 
-        // POST: api/Customer
-        public HttpResponseMessage Post([FromBody] customer obj)
+        // POST: api/Fixture
+        public HttpResponseMessage Post([FromBody] child obj)
         {
             try
             {
                 using (QLMamNonEntities db = new QLMamNonEntities())
                 {
-                    db.customers.Add(obj);
+                    db.children.Add(obj);
                     db.SaveChanges();
                     return Request.CreateResponse(HttpStatusCode.Created, obj);
                 }
@@ -57,26 +56,23 @@ namespace BTN_QL_MamNon.Controllers
 
         }
 
-        // PUT: api/Customer/5
-        public HttpResponseMessage Put(int id, [FromBody] customer value)
+        // PUT: api/Child/5
+        public HttpResponseMessage Put(int id, [FromBody] child value)
         {
             try
             {
                 using (QLMamNonEntities db = new QLMamNonEntities())
                 {
-                    customer s = db.customers.SingleOrDefault(b => b.id == id);
+                    child s = db.children.SingleOrDefault(b => b.id == id);
                     if (s != null)
                     {
                         s.name = value.name;
-                        s.phone = value.phone;
-                        s.username = value.username;
-                        s.password = value.password;
-                        s.address = value.address;
-                        s.account_number = value.account_number;
-                        s.avatar = value.avatar;
+                        s.birthday = value.birthday;
+                        s.gender = value.gender;
+                        s.status = value.status;
+                        s.id_customer = value.id_customer;
                         db.SaveChanges();
-
-                        return Request.CreateResponse(HttpStatusCode.OK, new customerDTO(s.id, s.name, s.phone, s.username, s.avatar, s.address, s.account_number));
+                        return Request.CreateResponse(HttpStatusCode.OK, new childDTO(s.id, s.name, s.birthday.ToString(),(int)(s.gender), (int)(s.status), Convert.ToInt64(s.id_customer)));
                     }
                     else
                     {
@@ -90,15 +86,15 @@ namespace BTN_QL_MamNon.Controllers
             }
         }
 
-        // DELETE: api/Customer/5
+        // DELETE: api/Child/5
         public HttpResponseMessage Delete(int id)
         {
             try
             {
                 using (QLMamNonEntities db = new QLMamNonEntities())
                 {
-                    customer s = db.customers.SingleOrDefault(x => x.id == id);
-                    db.customers.Remove(s);
+                    child s = db.children.SingleOrDefault(x => x.id == id);
+                    db.children.Remove(s);
                     db.SaveChanges();
                     return Request.CreateResponse(HttpStatusCode.OK);
                 }
