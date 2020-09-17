@@ -9,9 +9,12 @@
 
 namespace BTN_QL_MamNon.Models
 {
+    using Newtonsoft.Json;
+
     using System;
     using System.Collections.Generic;
-    
+    using System.Xml.Serialization;
+
     public partial class customer
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -29,7 +32,8 @@ namespace BTN_QL_MamNon.Models
         public string address { get; set; }
         public string account_number { get; set; }
         public string avatar { get; set; }
-    
+        [JsonIgnore]
+        [XmlIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<child> children { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
