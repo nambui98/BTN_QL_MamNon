@@ -167,7 +167,7 @@
     <Compile Include="Controllers\fixtureController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KitchenController.cs" />
-    <Compile Include="Controllers\Kitchen_providerController.cs" />
+    <Compile Include="Controllers\KitchenProviderController.cs" />
     <Compile Include="Controllers\LessonController.cs" />
     <Compile Include="Controllers\Lesson_planController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
