@@ -1,34 +1,32 @@
-﻿using BTN_QL_MamNon.DTO;
-using BTN_QL_MamNon.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-
-
+using BTN_QL_MamNon.Models;
+using BTN_QL_MamNon.DTO;
 namespace BTN_QL_MamNon.Controllers
 {
-    public class ChildController : ApiController
+    public class positon_roleController : ApiController
     {
-        // GET: api/Child
+        // GET: api/positon_role
         public HttpResponseMessage Get()
         {
             QLMamNonEntities db = new QLMamNonEntities();
-            var result = db.children;
+            var result = db.position_role;
             return Request.CreateResponse(HttpStatusCode.OK, result.ToList());
         }
 
-        // GET: api/Child/5
-        public childDTO Get(int id)
+        // GET: api/Customer/5
+        public positon_roleDTO Get(int id)
         {
             using (QLMamNonEntities db = new QLMamNonEntities())
             {
-                child s = db.children.SingleOrDefault(x => x.id == id);
+                position_role s = db.position_role.SingleOrDefault(x => x.id == id);
                 if (s != null)
                 {
-                    return new childDTO(s.id, s.name,s.birthday.ToString(),(int)(s.gender), (int)(s.status), Convert.ToInt64(s.id_customer));
+                    return new positon_roleDTO(s.id, Convert.ToInt64(s.id_position),Convert.ToInt64(s.id_role));
                 }
                 else
                 {
@@ -37,14 +35,14 @@ namespace BTN_QL_MamNon.Controllers
             }
         }
 
-        // POST: api/Fixture
-        public HttpResponseMessage Post([FromBody] child obj)
+        // POST: api/Customer
+        public HttpResponseMessage Post([FromBody] position_role obj)
         {
             try
             {
                 using (QLMamNonEntities db = new QLMamNonEntities())
                 {
-                    db.children.Add(obj);
+                    db.position_role.Add(obj);
                     db.SaveChanges();
                     return Request.CreateResponse(HttpStatusCode.Created, obj);
                 }
@@ -56,23 +54,23 @@ namespace BTN_QL_MamNon.Controllers
 
         }
 
-        // PUT: api/Child/5
-        public HttpResponseMessage Put(int id, [FromBody] child value)
+        // PUT: api/Customer/5
+        public HttpResponseMessage Put(int id, [FromBody] position_role value)
         {
             try
             {
                 using (QLMamNonEntities db = new QLMamNonEntities())
                 {
-                    child s = db.children.SingleOrDefault(b => b.id == id);
+                    position_role s = db.position_role.SingleOrDefault(b => b.id == id);
                     if (s != null)
                     {
-                        s.name = value.name;
-                        s.birthday = value.birthday;
-                        s.gender = value.gender;
-                        s.status = value.status;
-                        s.id_customer = value.id_customer;
+                      
+                        s.id_position = value.id_position;
+                        s.id_role = value.id_role;
+                       
                         db.SaveChanges();
-                        return Request.CreateResponse(HttpStatusCode.OK, new childDTO(s.id, s.name, s.birthday.ToString(),(int)(s.gender), (int)(s.status), Convert.ToInt64(s.id_customer)));
+
+                        return Request.CreateResponse(HttpStatusCode.OK, new positon_roleDTO(s.id,Convert.ToInt32(s.id_position), Convert.ToInt32(s.id_role)));
                     }
                     else
                     {
@@ -86,15 +84,15 @@ namespace BTN_QL_MamNon.Controllers
             }
         }
 
-        // DELETE: api/Child/5
+        // DELETE: api/Customer/5
         public HttpResponseMessage Delete(int id)
         {
             try
             {
                 using (QLMamNonEntities db = new QLMamNonEntities())
-                {
-                    child s = db.children.SingleOrDefault(x => x.id == id);
-                    db.children.Remove(s);
+                { 
+                    position_role s = db.position_role.SingleOrDefault(x => x.id == id);
+                    db.position_role.Remove(s);
                     db.SaveChanges();
                     return Request.CreateResponse(HttpStatusCode.OK);
                 }

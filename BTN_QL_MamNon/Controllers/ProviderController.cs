@@ -4,30 +4,30 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using BTN_QL_MamNon.DTO;
 using BTN_QL_MamNon.Models;
+using BTN_QL_MamNon.DTO;
 
 namespace BTN_QL_MamNon.Controllers
 {
-    public class LessonController : ApiController
+    public class ProviderController : ApiController
     {
-        // GET: api/Lesson
+        // GET: api/Provider
         public HttpResponseMessage Get()
         {
             QLMamNonEntities db = new QLMamNonEntities();
-            var result = db.lessons;
+            var result = db.providers;
             return Request.CreateResponse(HttpStatusCode.OK, result.ToList());
         }
 
-        // GET: api/Lesson/5
-        public lessonDTO Get(int id)
+        // GET: api/Customer/5
+        public providerDTO Get(int id)
         {
             using (QLMamNonEntities db = new QLMamNonEntities())
             {
-                lesson s = db.lessons.SingleOrDefault(x => x.id == id);
+                provider s = db.providers .SingleOrDefault(x => x.id == id);
                 if (s != null)
                 {
-                    return new lessonDTO(s.id, Convert.ToInt64(s.id_plan), Convert.ToInt64(s.id_staff),s.name,s.content,s.time_start.ToString(),s.time_end.ToString());
+                    return new providerDTO(s.id, s.name, s.phone, s.address);
                 }
                 else
                 {
@@ -36,14 +36,14 @@ namespace BTN_QL_MamNon.Controllers
             }
         }
 
-        // POST: api/Lesson
-        public HttpResponseMessage Post([FromBody] lesson obj)
+        // POST: api/Customer
+        public HttpResponseMessage Post([FromBody] provider obj)
         {
             try
             {
                 using (QLMamNonEntities db = new QLMamNonEntities())
                 {
-                    db.lessons.Add(obj);
+                    db.providers.Add(obj);
                     db.SaveChanges();
                     return Request.CreateResponse(HttpStatusCode.Created, obj);
                 }
@@ -55,23 +55,21 @@ namespace BTN_QL_MamNon.Controllers
 
         }
 
-        // PUT: api/Lesson/5
-        public HttpResponseMessage Put(int id, [FromBody] lesson value)
+        // PUT: api/Customer/5
+        public HttpResponseMessage Put(int id, [FromBody] provider value)
         {
             try
             {
                 using (QLMamNonEntities db = new QLMamNonEntities())
                 {
-                    lesson s = db.lessons.SingleOrDefault(b => b.id == id);
+                    provider s = db.providers.SingleOrDefault(b => b.id == id);
                     if (s != null)
                     {
-                        s.id_plan = value.id_plan;
-                        s.id_staff = value.id_staff;
                         s.name = value.name;
-                        s.content = value.content;
-                        s.time_start = value.time_start;
-                        s.time_end = value.time_end;
-                        return Request.CreateResponse(HttpStatusCode.OK, new lessonDTO(s.id, Convert.ToInt64(s.id_plan), Convert.ToInt64(s.id_staff), s.name, s.content, s.time_start.ToString(), s.time_end.ToString()));
+                        s.phone = value.phone;
+                        s.address = value.name;
+                        db.SaveChanges();
+                        return Request.CreateResponse(HttpStatusCode.OK, new providerDTO(s.id, s.name, s.phone, s.address));
                     }
                     else
                     {
@@ -85,15 +83,15 @@ namespace BTN_QL_MamNon.Controllers
             }
         }
 
-        // DELETE: api/Lesson/5
+        // DELETE: api/Customer/5
         public HttpResponseMessage Delete(int id)
         {
             try
             {
                 using (QLMamNonEntities db = new QLMamNonEntities())
                 {
-                    lesson s = db.lessons.SingleOrDefault(x => x.id == id);
-                    db.lessons.Remove(s);
+                    provider s = db.providers.SingleOrDefault(x => x.id == id);
+                    db.providers.Remove(s);
                     db.SaveChanges();
                     return Request.CreateResponse(HttpStatusCode.OK);
                 }

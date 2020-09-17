@@ -4,30 +4,29 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using BTN_QL_MamNon.DTO;
 using BTN_QL_MamNon.Models;
-
+using BTN_QL_MamNon.DTO;
 namespace BTN_QL_MamNon.Controllers
 {
-    public class fixtureController : ApiController
+    public class revenue_expenditureController : ApiController
     {
-        // GET: api/Fixture
+        // GET: api/revenue_expenditure
         public HttpResponseMessage Get()
         {
             QLMamNonEntities db = new QLMamNonEntities();
-            var result = db.fixtures;
+            var result = db.revenue_expenditure;
             return Request.CreateResponse(HttpStatusCode.OK, result.ToList());
         }
 
-        // GET: api/Fixture/5
-        public fixturesDTO Get(int id)
+        // GET: api/Customer/5
+        public revenue_expenditureDTO Get(int id)
         {
             using (QLMamNonEntities db = new QLMamNonEntities())
             {
-                fixture s = db.fixtures.SingleOrDefault(x => x.id == id);
+                revenue_expenditure s = db.revenue_expenditure.SingleOrDefault(x => x.id == id);
                 if (s != null)
                 {
-                    return new fixturesDTO(s.id, Convert.ToInt64(s.id_category_fixtures),s.name, (int)(s.remain_quantity), (int)(s.lose_quantity));
+                    return new revenue_expenditureDTO(s.id, s.name, Convert.ToInt64(s.pay), (int)(s.pay_type), (int)(s.status),Convert.ToInt64(s.id_staff));
                 }
                 else
                 {
@@ -36,14 +35,14 @@ namespace BTN_QL_MamNon.Controllers
             }
         }
 
-        // POST: api/Fixture
-        public HttpResponseMessage Post([FromBody] fixture obj)
+        // POST: api/Customer
+        public HttpResponseMessage Post([FromBody] revenue_expenditure obj)
         {
             try
             {
                 using (QLMamNonEntities db = new QLMamNonEntities())
                 {
-                    db.fixtures.Add(obj);
+                    db.revenue_expenditure.Add(obj);
                     db.SaveChanges();
                     return Request.CreateResponse(HttpStatusCode.Created, obj);
                 }
@@ -55,22 +54,25 @@ namespace BTN_QL_MamNon.Controllers
 
         }
 
-        // PUT: api/Fixture/5
-        public HttpResponseMessage Put(int id, [FromBody] fixture value)
+        // PUT: api/Customer/5
+        public HttpResponseMessage Put(int id, [FromBody] revenue_expenditure value)
         {
             try
             {
                 using (QLMamNonEntities db = new QLMamNonEntities())
                 {
-                    fixture s = db.fixtures.SingleOrDefault(b => b.id == id);
+                    revenue_expenditure s = db.revenue_expenditure.SingleOrDefault(b => b.id == id);
                     if (s != null)
                     {
-                        s.id_category_fixtures = value.id_category_fixtures;
                         s.name = value.name;
-                        s.remain_quantity = value.remain_quantity;
-                        s.lose_quantity = value.lose_quantity;
+                        s.pay = value.pay;
+                        s.pay_type = value.pay_type;
+                        s.status = value.status;
+                        s.id_staff = value.id_staff;
+                        
                         db.SaveChanges();
-                        return Request.CreateResponse(HttpStatusCode.OK, new fixturesDTO(s.id, Convert.ToInt64(s.id_category_fixtures), s.name, (int)(s.remain_quantity), (int)(s.lose_quantity)));
+
+                        return Request.CreateResponse(HttpStatusCode.OK, new revenue_expenditureDTO(s.id, s.name, Convert.ToInt64(s.pay), (int)(s.pay_type), (int)(s.status), Convert.ToInt64(s.id_staff))) ;
                     }
                     else
                     {
@@ -84,15 +86,15 @@ namespace BTN_QL_MamNon.Controllers
             }
         }
 
-        // DELETE: api/Fixture/5
+        // DELETE: api/Customer/5
         public HttpResponseMessage Delete(int id)
         {
             try
             {
                 using (QLMamNonEntities db = new QLMamNonEntities())
                 {
-                    fixture s = db.fixtures.SingleOrDefault(x => x.id == id);
-                    db.fixtures.Remove(s);
+                    revenue_expenditure s = db.revenue_expenditure.SingleOrDefault(x => x.id == id);
+                    db.revenue_expenditure.Remove(s);
                     db.SaveChanges();
                     return Request.CreateResponse(HttpStatusCode.OK);
                 }

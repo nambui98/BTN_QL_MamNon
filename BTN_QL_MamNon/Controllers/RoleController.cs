@@ -4,30 +4,29 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using BTN_QL_MamNon.DTO;
 using BTN_QL_MamNon.Models;
-
+using BTN_QL_MamNon.DTO;
 namespace BTN_QL_MamNon.Controllers
 {
-    public class KitchenController : ApiController
+    public class RoleController : ApiController
     {
-        // GET: api/Kitchen
+        // GET: api/Role
         public HttpResponseMessage Get()
         {
             QLMamNonEntities db = new QLMamNonEntities();
-            var result = db.kitchens;
+            var result = db.roles;
             return Request.CreateResponse(HttpStatusCode.OK, result.ToList());
         }
 
-        // GET: api/Kitchen/5
-        public kitchenDTO Get(int id)
+        // GET: api/Customer/5
+        public roleDTO Get(int id)
         {
             using (QLMamNonEntities db = new QLMamNonEntities())
             {
-                kitchen s = db.kitchens.SingleOrDefault(x => x.id == id);
+                role s = db.roles.SingleOrDefault(x => x.id == id);
                 if (s != null)
                 {
-                    return new kitchenDTO(s.id, s.name, s.address);
+                    return new roleDTO(s.id, s.name, s.address);
                 }
                 else
                 {
@@ -36,14 +35,14 @@ namespace BTN_QL_MamNon.Controllers
             }
         }
 
-        // POST: api/Kitchen
-        public HttpResponseMessage Post([FromBody] kitchen obj)
+        // POST: api/Customer
+        public HttpResponseMessage Post([FromBody] role obj)
         {
             try
             {
                 using (QLMamNonEntities db = new QLMamNonEntities())
                 {
-                    db.kitchens.Add(obj);
+                    db.roles.Add(obj);
                     db.SaveChanges();
                     return Request.CreateResponse(HttpStatusCode.Created, obj);
                 }
@@ -55,19 +54,22 @@ namespace BTN_QL_MamNon.Controllers
 
         }
 
-        // PUT: api/Kitchen/5
-        public HttpResponseMessage Put(int id, [FromBody] kitchen value)
+        // PUT: api/Customer/5
+        public HttpResponseMessage Put(int id, [FromBody] role value)
         {
             try
             {
                 using (QLMamNonEntities db = new QLMamNonEntities())
                 {
-                    kitchen s = db.kitchens.SingleOrDefault(b => b.id == id);
+                    role s = db.roles.SingleOrDefault(b => b.id == id);
                     if (s != null)
                     {
                         s.name = value.name;
                         s.address = value.address;
-                        return Request.CreateResponse(HttpStatusCode.OK, new kitchenDTO(s.id, s.name, s.address));
+                       
+                        db.SaveChanges();
+
+                        return Request.CreateResponse(HttpStatusCode.OK, new roleDTO(s.id, s.name, s.address));
                     }
                     else
                     {
@@ -81,15 +83,15 @@ namespace BTN_QL_MamNon.Controllers
             }
         }
 
-        // DELETE: api/Kitchen/5
+        // DELETE: api/Customer/5
         public HttpResponseMessage Delete(int id)
         {
             try
             {
                 using (QLMamNonEntities db = new QLMamNonEntities())
                 {
-                    kitchen s = db.kitchens.SingleOrDefault(x => x.id == id);
-                    db.kitchens.Remove(s);
+                    role s = db.roles.SingleOrDefault(x => x.id == id);
+                    db.roles.Remove(s);
                     db.SaveChanges();
                     return Request.CreateResponse(HttpStatusCode.OK);
                 }

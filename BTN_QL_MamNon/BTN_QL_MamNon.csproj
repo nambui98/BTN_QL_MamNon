@@ -164,8 +164,20 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PaymentController.cs" />
+    <Compile Include="Controllers\PositionController.cs" />
+    <Compile Include="Controllers\positon_roleController.cs" />
+    <Compile Include="Controllers\ProviderController.cs" />
+    <Compile Include="Controllers\revenue_expenditureController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="DTO\customerDTO.cs" />
+    <Compile Include="DTO\PaymentDTO.cs" />
+    <Compile Include="DTO\positionDTO.cs" />
+    <Compile Include="DTO\positon_roleDTO.cs" />
+    <Compile Include="DTO\providerDTO.cs" />
+    <Compile Include="DTO\revenue_expenditureDTO.cs" />
+    <Compile Include="DTO\roleDTO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

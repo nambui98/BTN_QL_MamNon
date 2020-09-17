@@ -4,30 +4,29 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using BTN_QL_MamNon.DTO;
 using BTN_QL_MamNon.Models;
-
+using BTN_QL_MamNon.DTO;
 namespace BTN_QL_MamNon.Controllers
 {
-    public class Kitchen_providerController : ApiController
+    public class PositionController : ApiController
     {
-        // GET: api/Kitchen_provider
+        // GET: api/Position
         public HttpResponseMessage Get()
         {
             QLMamNonEntities db = new QLMamNonEntities();
-            var result = db.kitchen_provider;
+            var result = db.positions;
             return Request.CreateResponse(HttpStatusCode.OK, result.ToList());
         }
 
-        // GET: api/Kitchen_provider/5
-        public kitchen_providerDTO Get(int id)
+        // GET: api/Customer/5
+        public positionDTO Get(int id)
         {
             using (QLMamNonEntities db = new QLMamNonEntities())
             {
-                kitchen_provider s = db.kitchen_provider.SingleOrDefault(x => x.id == id);
+                position s = db.positions.SingleOrDefault(x => x.id == id);
                 if (s != null)
-                { 
-                    return new kitchen_providerDTO(s.id,Convert.ToInt64(s.id_kitchen),Convert.ToInt64(s.id_provider));
+                {
+                    return new positionDTO(s.id, s.name);
                 }
                 else
                 {
@@ -36,14 +35,14 @@ namespace BTN_QL_MamNon.Controllers
             }
         }
 
-        // POST: api/Kitchen_provider
-        public HttpResponseMessage Post([FromBody] kitchen_provider obj)
+        // POST: api/Customer
+        public HttpResponseMessage Post([FromBody] position obj)
         {
             try
             {
                 using (QLMamNonEntities db = new QLMamNonEntities())
                 {
-                    db.kitchen_provider.Add(obj);
+                    db.positions.Add(obj);
                     db.SaveChanges();
                     return Request.CreateResponse(HttpStatusCode.Created, obj);
                 }
@@ -55,19 +54,21 @@ namespace BTN_QL_MamNon.Controllers
 
         }
 
-        // PUT: api/Kitchen_provider/5
-        public HttpResponseMessage Put(int id, [FromBody] kitchen_provider value)
+        // PUT: api/Customer/5
+        public HttpResponseMessage Put(int id, [FromBody] position value)
         {
             try
             {
                 using (QLMamNonEntities db = new QLMamNonEntities())
                 {
-                    kitchen_provider s = db.kitchen_provider.SingleOrDefault(b => b.id == id);
+                    position s = db.positions.SingleOrDefault(b => b.id == id);
                     if (s != null)
                     {
-                        s.id_kitchen = value.id_kitchen;
-                        s.id_provider = value.id_provider;
-                        return Request.CreateResponse(HttpStatusCode.OK, new kitchen_providerDTO(s.id, Convert.ToInt64(s.id_kitchen), Convert.ToInt64(s.id_provider)));
+                        s.name = value.name;
+                        
+                        db.SaveChanges();
+
+                        return Request.CreateResponse(HttpStatusCode.OK, new positionDTO(s.id, s.name));
                     }
                     else
                     {
@@ -81,15 +82,15 @@ namespace BTN_QL_MamNon.Controllers
             }
         }
 
-        // DELETE: api/Kitchen_provider/5
+        // DELETE: api/Customer/5
         public HttpResponseMessage Delete(int id)
         {
             try
             {
                 using (QLMamNonEntities db = new QLMamNonEntities())
                 {
-                    kitchen_provider s = db.kitchen_provider.SingleOrDefault(x => x.id == id);
-                    db.kitchen_provider.Remove(s);
+                    position s = db.positions.SingleOrDefault(x => x.id == id);
+                    db.positions.Remove(s);
                     db.SaveChanges();
                     return Request.CreateResponse(HttpStatusCode.OK);
                 }

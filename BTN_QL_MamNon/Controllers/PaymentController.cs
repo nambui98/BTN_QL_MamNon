@@ -4,46 +4,48 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using BTN_QL_MamNon.DTO;
 using BTN_QL_MamNon.Models;
-
+using BTN_QL_MamNon.DTO;
 namespace BTN_QL_MamNon.Controllers
 {
-    public class Lesson_planController : ApiController
+    public class PaymentController : ApiController
     {
-        // GET: api/Lesson_plan
+        // GET: api/Payment
         public HttpResponseMessage Get()
         {
             QLMamNonEntities db = new QLMamNonEntities();
-            var result = db.lesson_plan;
+            var result = db.payments;
             return Request.CreateResponse(HttpStatusCode.OK, result.ToList());
+          
         }
 
-        // GET: api/Lesson_plan/5
-        public lesson_planDTO Get(int id)
+        // GET: api/Payment/5
+        public PaymentDTO Get(int id)
         {
-            using (QLMamNonEntities db = new QLMamNonEntities())
+            using(QLMamNonEntities db=new QLMamNonEntities())
             {
-                lesson_plan s = db.lesson_plan.SingleOrDefault(x => x.id == id);
+                payment s = db.payments.SingleOrDefault(x =>x.id == id);
                 if (s != null)
                 {
-                    return new lesson_planDTO(s.id,s.date.ToString() );
+                    return new PaymentDTO(s.id,Convert.ToInt64( s.id_customer), Convert.ToInt64(s.id_child), (int)(s.quantity_months),Convert.ToInt64(s.tuition_fees), s.payment_date.ToString(), s.expiration_date.ToString()
+                        ,(int)(s.status));
                 }
                 else
                 {
                     return null;
                 }
-            }
+            }    
+            
         }
 
-        // POST: api/Lesson_plan
-        public HttpResponseMessage Post([FromBody] lesson_plan obj)
+        // POST: api/Payment
+        public HttpResponseMessage Post([FromBody]payment obj)
         {
             try
             {
                 using (QLMamNonEntities db = new QLMamNonEntities())
                 {
-                    db.lesson_plan.Add(obj);
+                    db.payments.Add(obj);
                     db.SaveChanges();
                     return Request.CreateResponse(HttpStatusCode.Created, obj);
                 }
@@ -52,21 +54,28 @@ namespace BTN_QL_MamNon.Controllers
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
             }
-
         }
 
-        // PUT: api/Lesson_plan/5
-        public HttpResponseMessage Put(int id, [FromBody] lesson_plan value)
+        // PUT: api/Payment/5
+        public HttpResponseMessage Put(int id,[FromBody] payment value)
         {
             try
             {
                 using (QLMamNonEntities db = new QLMamNonEntities())
                 {
-                    lesson_plan s = db.lesson_plan.SingleOrDefault(b => b.id == id);
+                    payment s = db.payments.SingleOrDefault(b => b.id == id);
                     if (s != null)
                     {
-                        s.date = value.date;
-                        return Request.CreateResponse(HttpStatusCode.OK, new lesson_planDTO(s.id,s.date.ToString()));
+                        s.quantity_months = value.quantity_months;
+                        s.tuition_fees = value.tuition_fees;
+                        s.payment_date = value.payment_date;
+                        s.expiration_date = value.expiration_date;
+                        s.status = value.status;
+
+                        db.SaveChanges();
+
+                        return Request.CreateResponse(HttpStatusCode.OK, new PaymentDTO(s.id, Convert.ToInt64(s.id_customer), Convert.ToInt64(s.id_child), (int)(s.quantity_months), Convert.ToInt64(s.tuition_fees), s.payment_date.ToString(), s.expiration_date.ToString()
+                        , (int)(s.status)));
                     }
                     else
                     {
@@ -80,15 +89,15 @@ namespace BTN_QL_MamNon.Controllers
             }
         }
 
-        // DELETE: api/Lesson_plan/5
-        public HttpResponseMessage Delete(int id)
+            // DELETE: api/Payment/5
+            public HttpResponseMessage Delete(int id)
         {
             try
             {
                 using (QLMamNonEntities db = new QLMamNonEntities())
                 {
-                    lesson_plan s = db.lesson_plan.SingleOrDefault(x => x.id == id);
-                    db.lesson_plan.Remove(s);
+                    payment s = db.payments.SingleOrDefault(x => x.id == id);
+                    db.payments.Remove(s);
                     db.SaveChanges();
                     return Request.CreateResponse(HttpStatusCode.OK);
                 }
@@ -97,7 +106,6 @@ namespace BTN_QL_MamNon.Controllers
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
             }
-
         }
     }
 }
