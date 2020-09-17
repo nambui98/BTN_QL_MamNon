@@ -15,7 +15,6 @@ namespace BTN_QL_MamNon.DTO
         string account_number;
         string avatar;
         string name;
-
         public customerDTO(long id, string phone, string username, string address, string account_number, string avatar, string name)
         {
             this.id = id;
