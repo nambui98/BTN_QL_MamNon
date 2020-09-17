@@ -24,7 +24,7 @@ namespace BTN_QL_MamNon.Controllers
         {
             using(QLMamNonEntities db=new QLMamNonEntities())
             {
-                payment s = db.payments.SingleOrDefault(x => x.id == id);
+                payment s = db.payments.SingleOrDefault(x =>x.id == id);
                 if (s != null)
                 {
                     return new PaymentDTO(s.id,Convert.ToInt64( s.id_customer), Convert.ToInt64(s.id_child), (int)(s.quantity_months),Convert.ToInt64(s.tuition_fees), s.payment_date.ToString(), s.expiration_date.ToString()

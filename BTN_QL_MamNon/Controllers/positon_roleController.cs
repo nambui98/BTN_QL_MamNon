@@ -90,7 +90,7 @@ namespace BTN_QL_MamNon.Controllers
             try
             {
                 using (QLMamNonEntities db = new QLMamNonEntities())
-                {
+                { 
                     position_role s = db.position_role.SingleOrDefault(x => x.id == id);
                     db.position_role.Remove(s);
                     db.SaveChanges();
